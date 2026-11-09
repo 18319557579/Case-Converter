@@ -6,20 +6,28 @@
   <title>Case Converter</title>
   <style>
     :root {
-      color-scheme: light;
-      --bg: #f5f7fb;
-      --surface: #ffffff;
-      --surface-strong: #f8fafc;
-      --text: #172033;
-      --muted: #657189;
-      --border: #d9e0ea;
+      color-scheme: dark;
+      --bg: #0b1220;
+      --bg-glow: #132441;
+      --surface: #131e30;
+      --surface-strong: #1b2940;
+      --surface-input: #0d1728;
+      --surface-output: #101c2f;
+      --surface-hover: #243650;
+      --text: #e6edf7;
+      --muted: #9eacc3;
+      --border: #34445f;
+      --border-hover: #6487bd;
       --accent: #2563eb;
       --accent-dark: #1d4ed8;
-      --accent-soft: #e8f0ff;
-      --green: #12805c;
-      --green-soft: #e8f7f0;
-      --amber: #a15c07;
-      --shadow: 0 18px 48px rgba(23, 32, 51, 0.09);
+      --accent-soft: #274b7a;
+      --text-on-accent: #ffffff;
+      --focus: #93c5fd;
+      --green: #80dcb0;
+      --green-soft: #15382f;
+      --green-border: #34765d;
+      --amber: #f4bf75;
+      --shadow: 0 18px 48px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.025);
       --radius: 8px;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
@@ -28,11 +36,16 @@
       box-sizing: border-box;
     }
 
+    ::selection {
+      background: var(--accent-soft);
+      color: var(--text);
+    }
+
     body {
       margin: 0;
       min-height: 100vh;
       background:
-        linear-gradient(180deg, #eef4ff 0, transparent 340px),
+        linear-gradient(180deg, var(--bg-glow) 0, transparent 340px),
         var(--bg);
       color: var(--text);
     }
@@ -121,7 +134,7 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
       background: var(--surface-strong);
-      color: #27344c;
+      color: var(--text);
       cursor: pointer;
       font-size: 12px;
       font-weight: 700;
@@ -131,22 +144,27 @@
     }
 
     .case-button:hover {
-      border-color: #9db5dc;
-      background: #f1f6ff;
+      border-color: var(--border-hover);
+      background: var(--surface-hover);
     }
 
     .case-button:focus-visible,
     .icon-button:focus-visible,
     textarea:focus {
-      outline: 3px solid rgba(37, 99, 235, 0.22);
+      outline: 3px solid var(--focus);
       outline-offset: 2px;
     }
 
     .case-button[aria-pressed="true"] {
       border-color: var(--accent);
       background: var(--accent);
-      color: #ffffff;
+      color: var(--text-on-accent);
       box-shadow: 0 8px 22px rgba(37, 99, 235, 0.24);
+    }
+
+    .case-button[aria-pressed="true"]:hover {
+      border-color: var(--accent-dark);
+      background: var(--accent-dark);
     }
 
     .text-grid {
@@ -177,7 +195,7 @@
     }
 
     label {
-      color: #26344b;
+      color: var(--text);
       font-size: 14px;
       font-weight: 800;
     }
@@ -197,8 +215,8 @@
       min-height: 34px;
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      background: #ffffff;
-      color: #24324a;
+      background: var(--surface-strong);
+      color: var(--text);
       cursor: pointer;
       font-size: 13px;
       font-weight: 800;
@@ -208,8 +226,8 @@
     }
 
     .icon-button:hover {
-      border-color: #9db5dc;
-      background: #f6f9ff;
+      border-color: var(--border-hover);
+      background: var(--surface-hover);
     }
 
     .icon-button svg {
@@ -219,7 +237,7 @@
     }
 
     .copy-button.copied {
-      border-color: #8bc7ae;
+      border-color: var(--green-border);
       background: var(--green-soft);
       color: var(--green);
     }
@@ -230,15 +248,24 @@
       resize: vertical;
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      background: #ffffff;
+      background: var(--surface-input);
       color: var(--text);
+      caret-color: var(--focus);
       line-height: 1.45;
       padding: 12px;
       tab-size: 2;
     }
 
     textarea[readonly] {
-      background: #fbfcff;
+      background: var(--surface-output);
+    }
+
+    textarea:hover {
+      border-color: var(--border-hover);
+    }
+
+    textarea:focus {
+      border-color: var(--focus);
     }
 
     .status {
